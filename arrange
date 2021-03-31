@@ -1,0 +1,36 @@
+#include<iostream>
+#include<algorithm>
+#include<cmath>/*包含三个头文件*/
+using namespace std;
+int result[1000000], l = 0;/*初始整形变量l及整形数组为0*/
+void swap(int& a, int& b)/*定义返回类型为空的swap 函数*/
+{
+	int temp = a;/*将a的值付给temp*/
+	a = b;/*将b的值付给a*/
+	b = temp;/*运用temp来交换a,b的值*/
+}
+void Perm(int num[], int start, int end, int oldstart, int oldend)/*定义返回类型为空的Perm函数*/
+{
+	if (start == end)/*若strat和end相等*/
+	{
+		long long number = 0;/*将长整形变量number的值为0*/
+		int element = pow(10, oldend - oldstart);/*将pow函数的运算结果付给整型变量element*/
+		for (int i = 0; i <= end; i++)
+		{
+			number = number + num[i] * element;
+			element = element / 10;
+		}/*利用for循环巴拉巴拉罢了巴拉巴拉*/
+		result[l] = number;
+		l = l + 1;/*每轮都对l进行自增*/
+	}
+	else
+	{
+		for (int i = start; i <= end; i++)/*for循环*/
+		{
+			swap(num[start], num[i]);
+			Perm(num, start + 1, end, oldstart, oldend);
+			swap(num[start], num[i]);
+		}/*否则对其使用swap函数,Perm函数*/
+	}
+}
+int main()/*定义返回类型为整形的主函数*/
